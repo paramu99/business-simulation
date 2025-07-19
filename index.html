@@ -9,18 +9,32 @@
 <body>
 
   <header>
-    <h1>Game ID: <span id="game-id">G1234</span></h1>
-    <div>Player: Team1</div>
-    <button id="logout-btn">Logout</button>
+    <div class="header-container">
+      <div class="player-info">Player: Team1</div>
+    </div>
   </header>
 
   <main>
+  
+   <!-- Market Insights Section -->
+    <details open class="section">
+	  <summary><h2>Market Insights</h2></summary>
+	  <div class="insights-budgets-container">
+		<div class="insights-panel">
+		  <ul id="market-insights"></ul>
+		</div>
+		<div class="budgets-panel">
+		 
+		  <div id="budgets"></div>
+		</div>
+	  </div>
+	</details>
+
+	
     <!-- Player Input Section -->
     <details open class="section">
-      <summary><h2 id="round-heading">Round 1: Your Decisions</h2></summary>
-
-      <button id="toggle-financials-btn">Show Financial Summary</button>
-      <div id="budgets" style="margin: 20px 0; font-family: sans-serif; font-size: 14px;"></div>
+      <summary><h2 id="round-heading">Round 1: Your Decisions</h2></summary> 
+	  
       <div id="expected-cost" style="margin-top: 10px; font-weight: bold;"></div>
 
       <table>
@@ -32,7 +46,7 @@
             <th>Promotion (₹)</th>
             <th>Appearance (1–5)</th>
             <th>Usability (1–5)</th>
-			<th>Total Cost</th>
+            <th>Total Cost</th>
           </tr>
         </thead>
         <tbody id="input-table-body"></tbody>
@@ -41,29 +55,17 @@
       <button id="submit-btn">Submit Round</button>
     </details>
 
-
     <!-- Market Review Section -->
-	<details open class="section">
-	  <summary><h2>Market Review</h2></summary>
-
-	  <div id="review-table-body"></div> <!-- Cards inserted here -->
-
-	  <h3>Team Financials</h3>
-	  <div id="team-financials"></div>
-	</details>
-
-
-
-    <!-- Market Insights Section -->
     <details open class="section">
-      <summary><h2>Market Insights</h2></summary>
-      <ul id="market-insights"></ul>
+      <summary><h2>Market Review</h2></summary>
+
+      <div id="review-table-body"></div> <!-- Cards inserted here -->
+
+      <h3 style="display: none;">Team Financials</h3>
+      <div id="team-financials" style="display: none;"></div>
     </details>
 
-    <!-- Moderator Section -->
-    <details class="section">
-      <summary><h2>Moderator View (Coming Soon)</h2></summary>
-    </details>
+   
   </main>
 
   <!-- Scripts -->
