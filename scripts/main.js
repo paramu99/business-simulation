@@ -24,6 +24,15 @@ function validateTeam1Budget(totalCost) {
 
 
 function finalizeRound() {
+  calculateRoundProfits(currentRound);
+  renderTeamFinancials();
+  renderBudgets(); // Ensure budget updates too
+  
+  console.log("=== Round History for", currentRound, "===");
+  console.table(roundHistory.filter(e => e.round === currentRound));
+ 
+  currentRound++;
+  
   updateCustomerPreference(); 
   updateRoundHeading();
   generateInputTable();
@@ -31,13 +40,7 @@ function finalizeRound() {
   calculateTotalCosts();
   renderReviewTable();
   generateMarketInsights();
-  console.log("=== Round History for", currentRound, "===");
-  console.table(roundHistory.filter(e => e.round === currentRound));
-  calculateRoundProfits(currentRound);
-  renderTeamFinancials();
-  renderBudgets(); // Ensure budget updates too
-  currentRound++;
-
+  
   if (currentRound > 5) {
     declareWinner();
   }
@@ -52,7 +55,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderReviewTable();
   generateMarketInsights();
   renderTeamFinancials(); // ← add this
-
+  renderBudgets(); 
+  
   document.getElementById("submit-btn").addEventListener("click", handleSubmit);
   
   makeSectionsCollapsible();  // ✅ Add this line at the end
