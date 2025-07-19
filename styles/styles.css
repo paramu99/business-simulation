@@ -6,6 +6,32 @@ body {
   margin: 20px;
 }
 
+/* Header bar */
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #eaf1ff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.player-info {
+  font-size: 16px;
+  font-weight: bold;
+  color: #444;
+}
+
+/* Section blocks */
+.section {
+  margin-bottom: 24px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 10px 14px;
+}
+
 /* Collapsible Headings */
 .collapsible-section {
   border: 1px solid #ddd;
@@ -163,57 +189,204 @@ summary::after {
 details[open] > summary::after {
   content: "▲";
 }
-
+/* Review Section Layout */
 .review-cards {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.5rem;
 }
 
+/* Each round collapsible */
 .review-round {
-  background: #f8f8f8;
-  border-radius: 8px;
-  padding: 10px 15px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }
 
+/* Collapsible summary */
+.review-round summary {
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 12px 16px;
+  background-color: #e3efff;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ddd;
+  list-style: none;
+}
+
+.review-round summary::-webkit-details-marker {
+  display: none;
+}
+
+.review-round summary::after {
+  content: "▼";
+  font-size: 12px;
+  color: #555;
+  margin-left: 10px;
+}
+
+.review-round[open] summary::after {
+  content: "▲";
+}
+
+/* Product grid inside a round */
+.review-round[open] .review-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  padding: 16px;
+}
+
+/* Individual product card */
 .review-card {
-  background: #fff;
+  background: white;
   border: 1px solid #ddd;
-  padding: 10px;
-  margin-top: 5px;
-  border-radius: 6px;
-  font-family: sans-serif;
+  border-radius: 10px;
+  padding: 12px 16px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.review-card:hover {
+  transform: scale(1.015);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Card content */
+.review-card h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
 }
 
 .review-card ul {
-  padding-left: 20px;
-  margin-top: 5px;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
 }
 
 .review-card li {
-  margin-bottom: 4px;
-}
-.review-round summary {
-  font-weight: bold;
-  font-size: 1.1rem;
-  margin-bottom: 8px;
-  cursor: pointer;
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #444;
 }
 
-.review-round {
-  background: #f5f5f5;
-  border-radius: 6px;
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem;
+}
+
+.product-card {
+  background-color: #f0f0f0;
+  border-left: 5px solid #ccc;
+  padding: 0.75rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  font-size: 12px;
+}
+
+/* Team-based coloring */
+.product-card.team1 { border-color: #007bff; background-color: #e6f0ff; }
+.product-card.team2 { border-color: #28a745; background-color: #e6ffee; }
+.product-card.team3 { border-color: #ffc107; background-color: #fffbe6; }
+.product-card.team4 { border-color: #dc3545; background-color: #ffe6e6; }
+
+.product-card {
+  transition: transform 0.2s ease;
+}
+
+.product-card:hover {
+  transform: scale(1.02);
+}
+
+#toggle-financials-btn {
+  margin-top: 20px;
+}
+
+.budget-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.team1 { background-color: #e3f2fd; }
+.team2 { background-color: #e8f5e9; }
+.team3 { background-color: #fff8e1; }
+.team4 { background-color: #fce4ec; }
+
+.budget-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.budget-card {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  width: 160px;
+  font-size: 12px;
+  box-shadow: 1px 1px 4px rgba(0,0,0,0.05);
   margin-bottom: 10px;
-  padding: 8px 12px;
-  border: 1px solid #ccc;
+  line-height: 1.4;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: fadeInUp 0.4s ease-out forwards;
 }
 
-.review-card {
-  background: white;
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.budget-card.highlight-team {
+  background: #d8f0ff;
+  border-color: #0077cc;
+  font-weight: bold;
+}
+
+.insights-budgets-container {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.insights-panel {
+  flex: 1 1 35%;
+  min-width: 200px;
+}
+
+.budgets-panel {
+  flex: 1 1 60%;
+  min-width: 200px;
+}
+
+.budgets-panel h3 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+#budgets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
