@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Business Simulation Game</title>
+  <link rel="stylesheet" href="styles/styles.css" />
+</head>
+<body>
+
+  <header>
+    <h1>Game ID: <span id="game-id">G1234</span></h1>
+    <div>Player: Team1</div>
+    <button id="logout-btn">Logout</button>
+  </header>
+
+  <main>
+    <!-- Player Input Section -->
+    <details open class="section">
+      <summary><h2 id="round-heading">Round 1: Your Decisions</h2></summary>
+
+      <button id="toggle-financials-btn">Show Financial Summary</button>
+      <div id="budgets" style="margin: 20px 0; font-family: sans-serif; font-size: 14px;"></div>
+      <div id="expected-cost" style="margin-top: 10px; font-weight: bold;"></div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price (₹)</th>
+            <th>Quantity</th>
+            <th>Promotion (₹)</th>
+            <th>Appearance (1–5)</th>
+            <th>Usability (1–5)</th>
+			<th>Total Cost</th>
+          </tr>
+        </thead>
+        <tbody id="input-table-body"></tbody>
+      </table>
+
+      <button id="submit-btn">Submit Round</button>
+    </details>
+
+
+    <!-- Market Review Section -->
+	<details open class="section">
+	  <summary><h2>Market Review</h2></summary>
+
+	  <div id="review-table-body"></div> <!-- Cards inserted here -->
+
+	  <h3>Team Financials</h3>
+	  <div id="team-financials"></div>
+	</details>
+
+
+
+    <!-- Market Insights Section -->
+    <details open class="section">
+      <summary><h2>Market Insights</h2></summary>
+      <ul id="market-insights"></ul>
+    </details>
+
+    <!-- Moderator Section -->
+    <details class="section">
+      <summary><h2>Moderator View (Coming Soon)</h2></summary>
+    </details>
+  </main>
+
+  <!-- Scripts -->
+  <script src="scripts/logic.js"></script>
+  <script src="scripts/budgetUtils.js"></script>
+  <script src="scripts/roundUtils.js"></script>
+  <script src="scripts/teamLogic.js"></script>
+  <script src="scripts/ai.js"></script>
+  <script src="scripts/decisions.js"></script>
+  <script src="scripts/ui.js"></script>
+  <script src="scripts/insights.js"></script>
+  <script src="scripts/main.js"></script>
+
+</body>
+</html>
