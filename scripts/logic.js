@@ -17,6 +17,14 @@ let teamProfits = {
   Team4: 0
 };
 
+let teamRoundProfitsHistory = {
+  Team1: {},
+  Team2: {},
+  Team3: {},
+  Team4: {}
+};
+
+
 let teamInventory = {
   Team1: {},
   Team2: {},
@@ -67,6 +75,7 @@ function calculateRoundProfits(roundNumber) {
 
   for (const team in teamRoundProfits) {
     teamProfits[team] += teamRoundProfits[team];
+	teamRoundProfitsHistory[team][roundNumber] = teamRoundProfits[team];
   }
 }
 
