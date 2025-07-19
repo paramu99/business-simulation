@@ -111,7 +111,8 @@ function allocateMarketDemand() {
         round: currentRound,
         ...d,
         unitsSold,
-        unsold
+        unsold,
+		profit: (d.price * unitsSold) - d.totalCost
       });
     }
   }
