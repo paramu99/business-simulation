@@ -19,6 +19,7 @@ function generateInputTable() {
     tbody.appendChild(row);
   }
   document.getElementById("expected-cost").textContent = "Expected Total Cost: ₹0";
+  updateExpectedCost();
 }
 
 
