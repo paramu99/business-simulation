@@ -81,24 +81,49 @@ function renderReviewTable() {
   Object.entries(grouped).forEach(([round, entries]) => {
     const roundDetails = document.createElement("details");
     roundDetails.className = "review-round";
+    roundDetails.open = true;
     roundDetails.innerHTML = `<summary>🔄 Round ${round}</summary>`;
+
+    // My Products Section
+    const myHeader = document.createElement("h3");
+    myHeader.textContent = `Round ${round}: My Products`;
+    myHeader.style.margin = "1rem";
+    const myGrid = document.createElement("div");
+    myGrid.className = "product-grid";
+
+    // Other Teams Section
+    const otherHeader = document.createElement("h3");
+    otherHeader.textContent = `Round ${round}: Other Teams`;
+    otherHeader.style.margin = "1rem";
+    const otherGrid = document.createElement("div");
+    otherGrid.className = "product-grid";
 
     entries.forEach(entry => {
       const card = document.createElement("div");
-      card.className = "review-card";
+      card.className = `product-card ${entry.team.toLowerCase()}`;
       card.innerHTML = `
-        <strong>${entry.team}</strong> – <em>${entry.product}</em>
+        <h4>${entry.product}</h4>
         <ul>
           <li>Price: ₹${entry.price}</li>
           <li>Qty: ${entry.quantity}, Sold: ${entry.unitsSold ?? "-"}, Unsold: ${entry.unsold ?? "-"}</li>
           <li>Promo: ₹${entry.promo}</li>
           <li>Appearance: ${entry.appearance ?? "-"}, Usability: ${entry.usability ?? "-"}</li>
-          <li>Total Cost: ₹${entry.totalCost.toFixed(2)}</li>
+          <li>Total Cost: ₹${entry.totalCost?.toFixed(2) ?? "-"}</li>
+          <li>Profit: ₹${entry.profit ?? "-"}</li>
         </ul>
       `;
-      roundDetails.appendChild(card);
+
+      if (entry.team === "Team1") {
+        myGrid.appendChild(card);
+      } else {
+        otherGrid.appendChild(card);
+      }
     });
 
+    roundDetails.appendChild(myHeader);
+    roundDetails.appendChild(myGrid);
+    roundDetails.appendChild(otherHeader);
+    roundDetails.appendChild(otherGrid);
     wrapper.appendChild(roundDetails);
   });
 
@@ -106,28 +131,48 @@ function renderReviewTable() {
 }
 
 
+// Helper: assign a class for team color (e.g., team1, team2, team3...)
+function teamClass(team) {
+  const teamMap = {
+    "Team A": "team1",
+    "Team B": "team2",
+    "Team C": "team3",
+    "Team D": "team4"
+  };
+  return teamMap[team] || "team-default";
+}
+
+
+
+
 
 function renderBudgets() {
   const budgetDiv = document.getElementById("budgets");
-  const showAll = budgetDiv.dataset.showAll === "true";
-  budgetDiv.innerHTML = "";
+  budgetDiv.innerHTML = ""; // Clear previous
 
-  const team = "Team1";
-  const budget = getAvailableBudget(team);  // ← important fix
-  const profit = teamProfits[team] ?? 0;
+  const teams = ["Team1", "Team2", "Team3", "Team4"];
+  const wrapper = document.createElement("div");
+  wrapper.className = "budget-cards"; // for flex or grid styling
 
-  budgetDiv.innerHTML += `<p><strong>${team}</strong>: Budget = ₹${budget.toFixed(2)}, Profit = ₹${profit.toFixed(2)}</p>`;
+  teams.forEach(team => {
+    const budget = getAvailableBudget(team);
+    const profit = teamProfits[team] ?? 0;
 
-  if (showAll) {
-    budgetDiv.innerHTML += `<hr/><h4>All Teams</h4>`;
-    Object.entries(teamProfits).forEach(([teamName, _]) => {
-      const budget = getAvailableBudget(teamName);
-      const profit = teamProfits[teamName] ?? 0;
-      budgetDiv.innerHTML += `<p>${teamName}: Budget = ₹${budget.toFixed(2)}, Profit = ₹${profit.toFixed(2)}</p>`;
-    });
-  }
+    const card = document.createElement("div");
+    card.className = "budget-card";
+    if (team === "Team1") card.classList.add("highlight-team"); // Optional highlight
+
+    card.innerHTML = `
+      <strong>${team}</strong><br>
+      Available Budget: ₹${budget.toFixed(2)}<br>
+      Cumulative Profit: ₹${profit.toFixed(2)}
+    `;
+
+    wrapper.appendChild(card);
+  });
+
+  budgetDiv.appendChild(wrapper);
 }
-
 
 function renderTeamFinancials() {
   const container = document.getElementById("team-financials");
