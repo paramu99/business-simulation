@@ -62,7 +62,7 @@ function updateExpectedCost() {
 
 function updateRoundHeading() {
   document.getElementById("round-heading").textContent = `Round ${currentRound}: Your Decisions`;
-  renderBudgets();
+  //renderBudgets();
 }
 
 function renderReviewTable() {
@@ -142,10 +142,6 @@ function teamClass(team) {
   return teamMap[team] || "team-default";
 }
 
-
-
-
-
 function renderBudgets() {
   const budgetDiv = document.getElementById("budgets");
   budgetDiv.innerHTML = ""; // Clear previous
@@ -155,6 +151,9 @@ function renderBudgets() {
   wrapper.className = "budget-cards"; // for flex or grid styling
 
   teams.forEach(team => {
+	const totalProfit = teamProfits[team] || 0;
+	const roundProfit = teamRoundProfitsHistory[team]?.[currentRound] ?? 0;
+
     const budget = getAvailableBudget(team);
     const profit = teamProfits[team] ?? 0;
 
@@ -164,8 +163,9 @@ function renderBudgets() {
 
     card.innerHTML = `
       <strong>${team}</strong><br>
-      Available Budget: ₹${budget.toFixed(2)}<br>
-      Cumulative Profit: ₹${profit.toFixed(2)}
+        Budget:₹${budget}<br/>
+		Profit (Round ${currentRound}):₹${roundProfit}<br/>
+		Total Profit:₹${totalProfit}<br/>
     `;
 
     wrapper.appendChild(card);
@@ -203,17 +203,6 @@ function renderTeamFinancials() {
   `;
   container.appendChild(table);
 }
-
-document.getElementById("toggle-financials-btn").addEventListener("click", () => {
-  const budgetDiv = document.getElementById("budgets");
-  const currentlyShowingAll = budgetDiv.dataset.showAll === "true";
-  budgetDiv.dataset.showAll = (!currentlyShowingAll).toString();
-
-  const btn = document.getElementById("toggle-financials-btn");
-  btn.textContent = currentlyShowingAll ? "Show Financial Summary" : "Hide Financial Summary";
-
-  renderBudgets();
-});
 
 //collapsible sections
 document.querySelectorAll(".collapsible-header").forEach(header => {
