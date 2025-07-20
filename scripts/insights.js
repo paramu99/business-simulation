@@ -64,3 +64,25 @@ function trendSummary(playerPrices, aiPrices) {
 function average(arr) {
   return arr.reduce((sum, val) => sum + val, 0) / arr.length;
 }
+
+function getCurrentRoundWeightsText() {
+  const pref = currentCustomerPreference;
+  let weights = {
+    price: 0.25,
+    promo: 0.25,
+    usability: 0.25,
+    availability: 0.25,
+  };
+
+  if (pref === 'Price') {
+    weights = { price: 0.45, promo: 0.15, usability: 0.2, availability: 0.2 };
+  } else if (pref === 'Promo') {
+    weights = { price: 0.15, promo: 0.45, usability: 0.2, availability: 0.2 };
+  } else if (pref === 'Usability') {
+    weights = { price: 0.2, promo: 0.1, usability: 0.5, availability: 0.2 };
+  } else if (pref === 'Availability') {
+    weights = { price: 0.2, promo: 0.2, usability: 0.2, availability: 0.4 };
+  }
+
+  return `Weights this round → Price: ${weights.price}, Promo: ${weights.promo}, Usability: ${weights.usability}, Availability: ${weights.availability}`;
+}
