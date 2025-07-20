@@ -501,6 +501,7 @@ details[open] > summary::after {
   font-size: 0.9rem;
   color: #333;
   width: 100%;
+  display:none;
 }
 
 .market-debug-box h3 {
