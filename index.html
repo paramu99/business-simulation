@@ -15,22 +15,21 @@
   </header>
 
   <main>
-  
-   <!-- Market Insights Section -->
-    <details open class="section">
-	  <summary><h2>Market Insights</h2></summary>
-	  <div class="insights-budgets-container">
-		<div class="insights-panel">
-		  <ul id="market-insights"></ul>
-		</div>
-		<div class="budgets-panel">
-		 
-		  <div id="budgets"></div>
-		</div>
-	  </div>
-	</details>
+<!-- Help / Intro Section -->
+<div id="game-help" class="help-section">
+  <button id="close-help" class="close-btn">✖</button>
+  <h2>Welcome to the Business Simulation Game</h2>
+  <p>
+    You are managing a company with multiple products. Your objective is to maximize profits over 5 rounds by making smart decisions about pricing, production quantity, promotion, and product features.
+  </p>
+  <p>
+    Each round, you’ll receive a budget. Spend wisely to outperform AI teams. After 5 rounds, the most profitable team wins.
+  </p>
+</div>
 
-	
+<!-- Help Icon -->
+<div id="help-icon">?</div>
+
     <!-- Player Input Section -->
     <details open class="section">
       <summary><h2 id="round-heading">Round 0: Your Decisions</h2></summary> 
@@ -55,6 +54,23 @@
       <button id="submit-btn">Submit Round</button>
     </details>
 
+	<!-- Market Insights Section -->
+    <details open class="section">
+	  <summary><h2>Market Insights</h2></summary>
+	  <div class="insights-budgets-container">
+		<div class="insights-panel">
+		  <ul id="market-insights"></ul>
+		</div>
+			
+		<div class="budgets-panel">
+		  <div id="budgets"></div>
+		</div>
+		
+		<div id="market-debug-box" class="market-debug-box"></div>
+		
+	  </div>
+	</details>
+	
     <!-- Market Review Section -->
     <details open class="section">
       <summary><h2>Market Review</h2></summary>
