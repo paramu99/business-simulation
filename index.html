@@ -18,18 +18,43 @@
 <!-- Help / Intro Section -->
 <div id="game-help" class="help-section">
   <button id="close-help" class="close-btn">✖</button>
-  <h2>Welcome to the Business Simulation Game</h2>
-  <p>
-    You are managing a company with multiple products. Your objective is to maximize profits over 5 rounds by making smart decisions about pricing, production quantity, promotion, and product features.
+
+  <h2>📘 Welcome to the Business Simulation Game</h2>
+
+  <p>You’re managing a company that sells multiple <strong>products</strong> (think mobile phones). Your goal is to maximize profit over 5 rounds by making smart decisions on pricing, production, promotion, and design.</p>
+
+  <ul>
+    <li><strong>Price</strong> – What you charge for each product. Too high, customers may not buy; too low, you might lose money.</li>
+    <li><strong>Quantity</strong> – Number of units you produce. More units cost more, but enable more potential sales.</li>
+    <li><strong>Promotion</strong> – How much you spend on marketing. Higher promotion boosts visibility and demand.</li>
+    <li><strong>Usability & Appearance</strong> – Reflect how customers perceive your product. More important when customers care about experience.</li>
+  </ul>
+
+  <p><strong>Total Cost Formula:</strong>
+    <code>= (10 × Quantity) ± 50 × (Usability, Appearance values from the default value of 3) + Promotion</code>
   </p>
-  <p>
-    Each round, you’ll receive a budget. Spend wisely to outperform AI teams. After 5 rounds, the most profitable team wins.
-  </p>
+
+  <p>Good luck, CEO! 📈</p>
+</div>
 </div>
 
 <!-- Help Icon -->
 <div id="help-icon">?</div>
-
+	
+	<!-- Market Insights Section -->
+    <details open class="section">
+	  <summary><h2>Market Insights</h2></summary>
+	  <div class="insights-budgets-container">
+		<div class="insights-panel">
+		  <ul id="market-insights"></ul>
+		</div>
+			
+		<div class="budgets-panel">
+		  <div id="budgets"></div>
+		</div>
+				
+	  </div>
+	</details>
     <!-- Player Input Section -->
     <details open class="section">
       <summary><h2 id="round-heading">Round 0: Your Decisions</h2></summary> 
@@ -54,22 +79,7 @@
       <button id="submit-btn">Submit Round</button>
     </details>
 
-	<!-- Market Insights Section -->
-    <details open class="section">
-	  <summary><h2>Market Insights</h2></summary>
-	  <div class="insights-budgets-container">
-		<div class="insights-panel">
-		  <ul id="market-insights"></ul>
-		</div>
-			
-		<div class="budgets-panel">
-		  <div id="budgets"></div>
-		</div>
-		
-		<div id="market-debug-box" class="market-debug-box"></div>
-		
-	  </div>
-	</details>
+	
 	
     <!-- Market Review Section -->
     <details open class="section">
@@ -79,6 +89,9 @@
 
       <h3 style="display: none;">Team Financials</h3>
       <div id="team-financials" style="display: none;"></div>
+	  
+	  <div id="market-debug-box" class="market-debug-box"></div>
+	  
     </details>
 
    
