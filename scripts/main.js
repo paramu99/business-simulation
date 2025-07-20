@@ -4,6 +4,7 @@ function handleSubmit() {
 
   processAITeams();
   allocateMarketDemand();
+  renderPreviousRoundDebug();
   finalizeRound();
 }
 
@@ -37,7 +38,10 @@ function finalizeRound() {
   updateRoundHeading();
   generateInputTable();
   attachInputListeners();
+//  calculateTotalCosts();
+  setTimeout(() => {
   calculateTotalCosts();
+}, 0);
   renderReviewTable();
   generateMarketInsights();
   
@@ -49,13 +53,17 @@ function finalizeRound() {
 
 document.addEventListener("DOMContentLoaded", () => {
  generateInputTable();
+  //calculateTotalCosts();
+  setTimeout(() => {
   calculateTotalCosts();
+}, 0);
   attachInputListeners();
   updateRoundHeading();
   renderReviewTable();
   generateMarketInsights();
   renderTeamFinancials(); // ← add this
   renderBudgets(); 
+  //renderPreviousRoundDebug();
   
   document.getElementById("submit-btn").addEventListener("click", handleSubmit);
   
