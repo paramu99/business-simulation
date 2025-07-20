@@ -8,13 +8,13 @@ function generateInputTable() {
   for (let i = 1; i <= NUM_PRODUCTS; i++) {
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td>Product ${i}</td>
-      <td><input type="number" id="price_${i}" min="0" value="100"/></td>
-      <td><input type="number" id="quantity_${i}" min="0" value="10"/></td>
-      <td><input type="number" id="promo_${i}" min="0" value="0"/></td>
-      <td><input type="number" id="appearance_${i}" min="1" max="5" value="3"/></td>
-      <td><input type="number" id="usability_${i}" min="1" max="5" value="3"/></td>
-      <td id="total_${i}">₹0</td>
+	  <td data-label="Product">Product ${i}</td>
+  <td data-label="Price"><input type="number" id="price_${i}" min="0" value="100"/></td>
+  <td data-label="Quantity"><input type="number" id="quantity_${i}" min="0" value="10"/></td>
+  <td data-label="Promo"><input type="number" id="promo_${i}" min="0" value="0"/></td>
+  <td data-label="Appearance"><input type="number" id="appearance_${i}" min="1" max="5" value="3"/></td>
+  <td data-label="Usability"><input type="number" id="usability_${i}" min="1" max="5" value="3"/></td>
+  <td data-label="Total" id="total_${i}">₹0</td>
     `;
     tbody.appendChild(row);
   }
@@ -212,3 +212,72 @@ document.querySelectorAll(".collapsible-header").forEach(header => {
     content.style.display = content.style.display === "none" ? "block" : "none";
   });
 });
+
+
+// On load, show help if not already seen
+if (localStorage.getItem("introSeen") !== "true") {
+  document.getElementById("game-help").classList.remove("hidden");
+}
+
+// Close help section and remember choice
+document.getElementById("close-help").addEventListener("click", () => {
+  document.getElementById("game-help").classList.add("hidden");
+  localStorage.setItem("introSeen", "true");
+});
+
+// Reopen help section from icon
+document.getElementById("help-icon").addEventListener("click", () => {
+  document.getElementById("game-help").classList.remove("hidden");
+});
+
+
+function renderPreviousRoundDebug() {
+  const box = document.getElementById("market-debug-box");
+  if (!box) return;
+
+  // Compute weights based on current preference
+  const baseWeights = {
+    price: 0.5,
+    promo: 0.2,
+    appearance: 0.15,
+    usability: 0.15
+  };
+
+  const preference = currentCustomerPreference;
+  if (preference && baseWeights[preference] !== undefined) {
+    baseWeights[preference] += 0.15;
+    const others = Object.keys(baseWeights).filter(k => k !== preference);
+    others.forEach(k => baseWeights[k] -= 0.05);
+  }
+
+  // Generate weights table HTML
+  const weightsTable = Object.entries(baseWeights).map(([factor, weight]) => {
+    return `<tr><td>${factor}</td><td>${weight.toFixed(2)}</td></tr>`;
+  }).join("");
+
+  // Generate product demand table HTML
+  const demandTable = Object.entries(totalDemand).map(([product, demand]) => {
+    return `<tr><td>${product}</td><td>${demand}</td></tr>`;
+  }).join("");
+
+  box.innerHTML = `
+    <h3>🔍 Market Debug Info (Dev Only) — Showing Round ${currentRound} (just completed)</h3>
+
+	<p><em>Rendered at: ${new Date().toLocaleTimeString()}</em></p>
+
+    <h4>📌 Customer Preference</h4>
+    <p><strong>Current Focus:</strong> ${preference}</p>
+
+    <h4>⚖️ Final Desirability Weights</h4>
+    <table>
+      <tr><th>Factor</th><th>Weight</th></tr>
+      ${weightsTable}
+    </table>
+
+    <h4>📦 Product-Level Demand</h4>
+    <table>
+      <tr><th>Product</th><th>Demand Units</th></tr>
+      ${demandTable}
+    </table>
+  `;
+}
