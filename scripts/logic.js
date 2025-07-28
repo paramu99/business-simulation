@@ -6,7 +6,7 @@ const PRODUCT_COST = 10;
 let currentRound = 1;
 let roundHistory = [];
 
-const baseBudget = 800;
+const baseBudget = 700;
 
 let currentCustomerPreference = "price"; // Default for Round 1
 
