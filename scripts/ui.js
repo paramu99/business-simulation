@@ -79,7 +79,9 @@ function renderReviewTable() {
   const wrapper = document.createElement("div");
   wrapper.classList.add("review-cards");
 
-  Object.entries(grouped).forEach(([round, entries]) => {
+  Object.entries(grouped)
+  .sort((a, b) => b[0] - a[0]) // New line: sort descending by round
+  .forEach(([round, entries]) => {
     const roundDetails = document.createElement("details");
     roundDetails.className = "review-round";
     roundDetails.open = true;
