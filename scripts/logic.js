@@ -1,12 +1,12 @@
 const MAX_ROUNDS = 5;
-const STARTING_BUDGET = 2000;
+const STARTING_BUDGET = 1000;
 const NUM_PRODUCTS = 2;
 const PRODUCT_COST = 10;
 
 let currentRound = 1;
 let roundHistory = [];
 
-const baseBudget = 1000;
+const baseBudget = 800;
 
 let currentCustomerPreference = "price"; // Default for Round 1
 
