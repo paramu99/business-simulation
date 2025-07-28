@@ -94,8 +94,14 @@ function allocateMarketDemand() {
     }));
 
     const totalDesirability = desirabilities.reduce((sum, d) => sum + d.desirability, 0);
-    const demand = totalDemand[product];
+//    const demand = totalDemand[product];
 
+//Adding increasing demand with some variance
+	const baseDemand = totalDemand[product] || 40;
+	const growthPerRound = 5; // You can tweak this to 3–10 as needed
+	const variance = Math.floor(Math.random() * 6); // 0 to 5 units of randomness
+	const demand = baseDemand + (currentRound - 1) * growthPerRound + variance;
+	  
     for (const d of desirabilities) {
       const { team, quantity, totalCost, desirability } = d;
       const carryoverQty = teamInventory[team][product] || 0;
