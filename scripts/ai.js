@@ -1,17 +1,17 @@
 const AI_PROFILES = {
   aggressive: {
     priceBias: -10,
-    promoBias: 10,
+    promoBias: 25,
     qualityBias: 1
   },
   conservative: {
     priceBias: 10,
-    promoBias: -5,
+    promoBias: 5,
     qualityBias: 2
   },
   balanced: {
     priceBias: 0,
-    promoBias: 0,
+    promoBias: 12,
     qualityBias: 1.5
   }
 };
